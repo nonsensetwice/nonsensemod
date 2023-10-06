@@ -21,11 +21,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     
-    # Get App version for use in image build
-    # stored in ${{ steps.package-version.outputs.current-version}}
-    - name: get-npm-version
-      id: package-version
-      uses: martinbeentjes/npm-get-version-action@v1.3.1
+    # app name stored in ${{ steps.package.outputs.name }}"
+    # app version stored in ${{ steps.package.outputs.version }}"
+    - name: Get App name and version for use in image build 
+      id: package
+      uses: codex-team/action-nodejs-package-info@v1.1
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
@@ -47,7 +47,7 @@ jobs:
         context: .
         file: ./Dockerfile.prod
         push: true
-        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:${{ steps.package-version.outputs.current-version}}
+        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/${{ steps.package.outputs.name }}"-image:${{ steps.package-version.outputs.current-version}}
         secrets: |
           'APP_NAME=${{ vars.APP_NAME }}'
           'DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}'
