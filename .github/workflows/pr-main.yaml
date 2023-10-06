@@ -1,0 +1,14 @@
+name: Run tooling on pr
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  call-lint-workflow:
+    uses: ./.github/workflows/lint-code.yaml
+  call-build-push-workflow:
+    needs: call-lint-workflow
+    uses: ./.github/workflows/build-push.yaml
+    secrets: inherit
