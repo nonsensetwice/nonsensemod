@@ -47,7 +47,7 @@ jobs:
         context: .
         file: ./Dockerfile.prod
         push: true
-        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/${{ steps.package.outputs.name }}"-image:${{ steps.package-version.outputs.current-version}}
+        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/${{ steps.package.outputs.name }}-image:${{ steps.package-version.outputs.current-version}}
         secrets: |
           'APP_NAME=${{ vars.APP_NAME }}'
           'DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}'
