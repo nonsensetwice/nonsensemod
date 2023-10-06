@@ -18,4 +18,4 @@ jobs:
     needs: call-build-push-workflow
     uses: ./.github/workflows/deploy.yaml
     secrets:
-      DIGITALOCEAN_ACCESS_TOKEN=${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
