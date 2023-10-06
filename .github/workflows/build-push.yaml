@@ -1,5 +1,5 @@
 # Build Docker image and push to digitalocean private registry
-name: Build Image and Push private registry
+name: Build Image and Push to private registry
 
 on:
   pull_request:
@@ -40,6 +40,9 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
+        file: ./Dockerfile-prod
+        push: true
+        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:latest
         secrets: |
           'APP_NAME=${{ vars.APP_NAME }}'
           'DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}'
@@ -50,6 +53,3 @@ jobs:
           'MONGODB_PASS=${{ secrets.MONGODB_PASS }}'
           'MONGODB_CLUSTER=${{ secrets.MONGODB_CLUSTER }}'
           'SENTRY_IO_DSN=${{ secrets.SENTRY_IO_DSN }}'
-        file: ./Dockerfile-prod
-        push: true
-        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:latest
