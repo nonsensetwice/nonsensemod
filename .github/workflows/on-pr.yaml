@@ -9,7 +9,8 @@ jobs:
   call-lint-workflow:
     uses: ./.github/workflows/lint-code.yaml
   call-build-push-workflow:
+    needs: call-lint-workflow
     uses: ./.github/workflows/build-push.yaml
     with:
-      environment: production
+      ENVIRONMENT: production
     secrets: inherit
