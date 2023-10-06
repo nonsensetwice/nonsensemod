@@ -10,7 +10,8 @@ jobs:
 
     name: Build and push Docker image
     runs-on: ubuntu-22.04
-    environment: production
+    # environment: production
+
     steps:
 
     - name: Checkout
