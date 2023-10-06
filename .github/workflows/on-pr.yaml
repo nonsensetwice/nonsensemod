@@ -11,5 +11,5 @@ jobs:
   call-build-push-workflow:
     uses: ./.github/workflows/build-push.yaml
     with:
-      ENVIRONMENT: production
+      environment: production
     secrets: inherit
