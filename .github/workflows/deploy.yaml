@@ -1,0 +1,38 @@
+name: Deploy to digitalocean App Platform
+
+on:
+  workflow_call:
+
+jobs:
+
+  deploy-app:
+
+    name: Deploy to App Platform
+    runs-on: ubuntu-22.04
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    # app name stored in ${{ steps.package.outputs.name }}"
+    # app version stored in ${{ steps.package.outputs.version }}"
+    - name: Get App name for use in App Deployment 
+      id: package
+      uses: codex-team/action-nodejs-package-info@v1.1
+
+    - name: DigitalOcean App Platform deployment
+      uses: digitalocean/app_action@v1.1.5
+      with:
+        app_name: ${{ steps.package.outputs.name }}"
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        images: '[
+          {
+            "name": "${{ steps.package.outputs.name }}",
+            "image": {
+              "registry_type": "DOCR",
+              "repository": "${{ steps.package.outputs.name }}"
+              "tag": "${{ steps.package.outputs.version }}"
+            }
+          }
+          ]'
