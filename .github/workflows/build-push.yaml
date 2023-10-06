@@ -16,6 +16,10 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v4
+    
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@v1.3.1
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
@@ -31,24 +35,19 @@ jobs:
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 600
 
-#    - name: Remove old images
-#      run: doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force
-#      env:
-#        IMAGE_NAME: nonsensemod-imagegit 
-
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile-prod
         push: true
-        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:latest
+        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:${{ steps.package-version.outputs.current-version}}
         secrets: |
           'APP_NAME=${{ vars.APP_NAME }}'
           'DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}'
           'DISCORD_BOT_PUBLIC_KEY=${{ secrets.DISCORD_BOT_PUBLIC_KEY }}'
           'DISCORD_BOT_APPLICATION_ID=${{ secrets.DISCORD_BOT_APPLICATION_ID }}'
-          'MONGODB_PREFIX=mongodb+srv'
+          'MONGODB_PREFIX=${{ vars.MONGODB_PREFIX }}'
           'MONGODB_USERNAME=${{ secrets.MONGODB_USERNAME }}'
           'MONGODB_PASS=${{ secrets.MONGODB_PASS }}'
           'MONGODB_CLUSTER=${{ secrets.MONGODB_CLUSTER }}'
