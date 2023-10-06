@@ -1,0 +1,55 @@
+# Build Docker image and push to digitalocean private registry
+name: Build Image and Push private registry
+
+on:
+  pull_request:
+    branches:
+      - 'test'
+
+jobs:
+
+  build:
+
+    name: Build and push Docker image
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 600
+
+    - name: Remove old images
+      run: doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force
+      env:
+        IMAGE_NAME: nonsensemod-imagegit 
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        secrets: |
+          'APP_NAME=${{ vars.APP_NAME }}'
+          'DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }}'
+          'DISCORD_BOT_PUBLIC_KEY=${{ secrets.DISCORD_BOT_PUBLIC_KEY }}'
+          'DISCORD_BOT_APPLICATION_ID=${{ secrets.DISCORD_BOT_APPLICATION_ID }}'
+          'MONGODB_PREFIX=mongodb+srv'
+          'MONGODB_USERNAME=${{ secrets.MONGODB_USERNAME }}'
+          'MONGODB_PASS=${{ secrets.MONGODB_PASS }}'
+          'MONGODB_CLUSTER=${{ secrets.MONGODB_CLUSTER }}'
+          'SENTRY_IO_DSN=${{ secrets.SENTRY_IO_DSN }}'
+        file: ./Dockerfile-prod
+        push: true
+        tags: ${{ vars.DIGITALOCEAN_REGISTRY }}/nonsensemod-image:latest

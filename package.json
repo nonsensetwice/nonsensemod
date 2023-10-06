@@ -1,6 +1,6 @@
 {
-  "name": "spades",
-  "description": "discord.js bot template",
+  "name": "nonsensemod",
+  "description": "personal discord bot for nonsensetwice",
   "version": "1.0.1",
   "main": "src/app/app.js",
   "type": "module",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nonsensetwice/spades.git"
+    "url": "git+https://github.com/nonsensetwice/nonsensemod.git"
   },
   "keywords": [
     "discord",
@@ -20,9 +20,9 @@
     "template"
   ],
   "bugs": {
-    "url": "https://github.com/nonsensetwice/spades/issues"
+    "url": "https://github.com/nonsensetwice/nonsensemod/issues"
   },
-  "homepage": "https://github.com/nonsensetwice/spades#readme",
+  "homepage": "https://github.com/nonsensetwice/nonsensemod#readme",
   "dependencies": {
     "@sapphire/framework": "^4.6.0",
     "@sentry/integrations": "^7.70.0",
