@@ -28,11 +28,11 @@ jobs:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         images: '[
           {
-            "name": "${{ steps.package.outputs.name }}",
+            "name": ${{ steps.package.outputs.name }},
             "image": {
-              "registry_type": "DOCR",
-              "repository": "${{ steps.package.outputs.name }}"
-              "tag": "${{ steps.package.outputs.version }}"
+              "registry_type": DOCR,
+              "repository": ${{ steps.package.outputs.name }}
+              "tag": ${{ steps.package.outputs.version }}
             }
           }
           ]'
