@@ -7,6 +7,24 @@ on:
       ENVIRONMENT:
         required: true
         type: string
+    secrets:
+      # Discord API
+      DISCORD_BOT_TOKEN:
+        required: true
+      DISCORD_BOT_PUBLIC_KEY:
+        required: true
+      DISCORD_BOT_APPLICATION_ID:
+        required: true
+
+      # MongoDB
+      MONGODB_PREFIX:
+        required: true
+      MONGODB_USERNAME:
+        required: true
+      MONGODB_PASS:
+        required: true
+      MONGODB_CLUSTER:
+        required: true
 
 jobs:
 
