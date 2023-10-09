@@ -14,25 +14,24 @@ jobs:
     uses: ./.github/workflows/build-push.yaml
     with:
       ENVIRONMENT: production
-    secrets:
-      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-      DISCORD_BOT_PUBLIC_KEY: ${{ secrets.DISCORD_BOT_PUBLIC_KEY }}
-      DISCORD_BOT_APPLICATION_ID: ${{ secrets.DISCORD_BOT_APPLICATION_ID }}
+    secrets: inherit
+      #DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      #DISCORD_BOT_PUBLIC_KEY: ${{ secrets.DISCORD_BOT_PUBLIC_KEY }}
+      #DISCORD_BOT_APPLICATION_ID: ${{ secrets.DISCORD_BOT_APPLICATION_ID }}
 
       # MongoDB
-      MONGODB_PREFIX: ${{ secrets.MONGODB_PREFIX }}
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASS: ${{ secrets.MONGODB_PASS }}
-      MONGODB_CLUSTER: ${{ secrets.MONGODB_CLUSTER }}
+      #MONGODB_PREFIX: ${{ secrets.MONGODB_PREFIX }}
+      #MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      #MONGODB_PASS: ${{ secrets.MONGODB_PASS }}
+      #MONGODB_CLUSTER: ${{ secrets.MONGODB_CLUSTER }}
 
       # Sentry
-      SENTRY_IO_DSN: ${{ secrets.SENTRY_IO_DSN }}
+      #SENTRY_IO_DSN: ${{ secrets.SENTRY_IO_DSN }}
 
       # Digital Ocean
-      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      #DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   call-deploy-workflow:
     needs: call-build-push-workflow
     uses: ./.github/workflows/deploy.yaml
-    secrets:
-      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    secrets: inherit
