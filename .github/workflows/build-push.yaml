@@ -25,6 +25,10 @@ on:
         required: true
       MONGODB_CLUSTER:
         required: true
+      
+      # Sentry
+      SENTRY_IO_DSN:
+        required: true
 
 jobs:
 
@@ -33,6 +37,15 @@ jobs:
     name: Build and push Docker image
     runs-on: ubuntu-22.04
     environment: ${{ inputs.ENVIRONMENT }}
+
+    env:
+      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      DISCORD_BOT_PUBLIC_KEY: ${{ secrets.DISCORD_BOT_PUBLIC_KEY }}
+      DISCORD_BOT_APPLICATION_ID: ${{ secrets.DISCORD_BOT_APPLICATION_ID }}
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASS: ${{ secrets.MONGODB_PASS }}
+      MONGODB_CLUSTER: ${{ secrets.MONGODB_CLUSTER }}
+      SENTRY_IO_DSN: ${{ secrets.SENTRY_IO_DSN }}
 
     steps:
 
