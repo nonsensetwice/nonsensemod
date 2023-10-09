@@ -8,7 +8,7 @@ on:
 jobs:
   call-lint-workflow:
     uses: ./.github/workflows/lint-code.yaml
-    
+
   call-build-push-workflow:
     needs: call-lint-workflow
     uses: ./.github/workflows/build-push.yaml
@@ -27,6 +27,9 @@ jobs:
 
       # Sentry
       SENTRY_IO_DSN: ${{ secrets.SENTRY_IO_DSN }}
+
+      # Digital Ocean
+      DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
   call-deploy-workflow:
     needs: call-build-push-workflow
