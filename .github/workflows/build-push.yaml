@@ -17,8 +17,6 @@ on:
         required: true
 
       # MongoDB
-      MONGODB_PREFIX:
-        required: true
       MONGODB_USERNAME:
         required: true
       MONGODB_PASS:
