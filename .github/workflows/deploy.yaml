@@ -2,6 +2,9 @@ name: Deploy to digitalocean App Platform
 
 on:
   workflow_call:
+    secrets:
+      DIGITALOCEAN_ACCESS_TOKEN:
+        required: true
 
 jobs:
 
