@@ -1,11 +1,14 @@
 # changelog
 
-## 1.0.1 release (10.03.23)
-1. uncommented sentry code in `app.js`
-2. removed commented-out code across codebase
-3. removed unused files
-4. updated README
-5. added CHANGELOG
+## 1.1.0 release (10.11.23)
+1. added hentai command
+2. lint fixes
+3. updated docker compose files
 
-## 1.0.0 release (10.02.23)
+## 1.0.2 release (10.09.23)
+1. updated app details in package.json
+2. updated LICENSE
+
+## 1.0.1 release (10.09.23)
 1. initialize bot and release boilerplate
+2. create deployment via digitalocean app platform
