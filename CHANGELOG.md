@@ -1,5 +1,8 @@
 # changelog
 
+## 1.1.1 release (10.11.23)
+1. pre-deployment linting yaml
+
 ## 1.1.0 release (10.11.23)
 1. added hentai command
 2. lint fixes
