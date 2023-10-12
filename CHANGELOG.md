@@ -1,5 +1,9 @@
 # changelog
 
+## 1.1.4 release (10.11.23)
+1. replace emblem with updated version
+2. updated README
+
 ## 1.1.3 release (10.11.23)
 1. uploaded logo/emblem
 2. updated README
