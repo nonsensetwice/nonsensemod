@@ -1,5 +1,8 @@
 # changelog
 
+## 1.1.2 release (10.11.23)
+1. fill out linting workflow
+
 ## 1.1.1 release (10.11.23)
 1. pre-deployment linting yaml
 
